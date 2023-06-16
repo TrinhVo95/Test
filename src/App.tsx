@@ -2,6 +2,58 @@ import React, { MouseEventHandler, useEffect, useRef, useState } from "react";
 import "./App.css";
 import GridLayoutCol from "./components/GridLayoutCol";
 
+type SplitType ='horizontal'|'vertical'
+
+interface Layout{
+  split:SplitType,
+  children:LayoutItem[]
+}
+interface LayoutItem{
+  id:string,
+  title:string,
+  size?:number|string,
+  split?:SplitType,
+  children?:LayoutItem[]
+}
+
+const datas:Layout = {
+  split: 'horizontal', // vertical horizontial
+  children:[
+{
+  id:'1',
+  size: 200,
+  title: 'col1',
+  split:'vertical',
+  children:[
+    {
+      id:'1.1',
+     title: 'col1.1',
+    }, 
+    {
+      id:'1.2',
+      title: 'col1.2',
+    }
+  ]  
+},
+{
+  id:'2',
+  title: 'col2',   
+},
+{
+  id:'3',
+  title: 'col3',   
+},
+
+]}
+interface Size{
+  width:number,
+  height:number,
+
+}
+
+interface FncalculateSize{
+  (data:Layout,width:number,height:number):Record<string,Size>
+}
 
 
 const App = () => {
@@ -48,27 +100,6 @@ const App = () => {
 
 
 // ]}
-
-const datas = {
-  split: 'horizontal', // vertical horizontial
-  children:[
-
-{
-  id:'1',
-  size: 200,
-  title: 'col1',  
-},
-{
-  id:'2',
-  title: 'col2',   
-},
-{
-  id:'3',
-  title: 'col3',   
-},
-
-]}
-
 
 
   return (
